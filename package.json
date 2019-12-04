@@ -1,0 +1,33 @@
+{
+  "name": "pattern-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode=development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kavi4/patternGenerator.git"
+  },
+  "author": "kavi4",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kavi4/patternGenerator/issues"
+  },
+  "homepage": "https://github.com/kavi4/patternGenerator#readme",
+  "devDependencies": {
+    "css-loader": "^3.2.1",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "vue-loader": "^15.7.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "vue": "^2.6.10"
+  }
+}
