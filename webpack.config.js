@@ -17,6 +17,13 @@ module.exports = {
                 loader: 'vue-loader'
             },
             {
+                test: /\.css$/i,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                ]
+            },
+            {
                 test: /\.sass$/,
                 use: [
                     'vue-style-loader',
@@ -31,14 +38,16 @@ module.exports = {
                     }
                 ]
             }
-        ]
+        ],
     },
+
     plugins: [
         new VueLoaderPlugin()
     ],
     resolve: {
         alias: {
             "Components": path.resolve(__dirname, 'src/components/'),
+            "Colors": path.resolve(__dirname, 'src/assets/colors.sass'),
         },
         extensions: [".js", ".vue"]
     },

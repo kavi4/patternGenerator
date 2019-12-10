@@ -1,25 +1,36 @@
 <template>
     <div id="app">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12">
-                    <test-component></test-component>
-                </div>
-            </div>
-        </div>
+        <pattern-preview></pattern-preview>
+        <setting-bar></setting-bar>
     </div>
 </template>
 
 <script>
-    import TestComponent from 'Components/TestComponent'
+    import PatternPreview from "Components/PatternPreview";
+    import SettingBar from "Components/SettingBar";
 
     export default {
         name: 'app',
-        components: {TestComponent},
+        components: {SettingBar, PatternPreview},
     }
 </script>
 
 <style lang="sass">
-    .app
-        background-color: aliceblue
+    @import "~Colors"
+    body
+        background-color: $color-main
+
+    #app
+        display: grid
+        grid-template-areas: "patternPreview settingBar"
+        grid-template-rows: 1fr
+        grid-template-columns: 3fr 1fr
+        grid-gap: 10px
+        height: 100vh
+
+    #setting-bar
+        grid-area: settingBar
+
+    #pattern-review
+        grid-area: patternPreview
 </style>
