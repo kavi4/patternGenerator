@@ -1,5 +1,6 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const webpack = require("webpack");
 
 module.exports = {
     mode: 'development',
@@ -42,7 +43,10 @@ module.exports = {
     },
 
     plugins: [
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new webpack.WatchIgnorePlugin([
+            path.join(__dirname, "node_modules")
+        ]),
     ],
     resolve: {
         alias: {
@@ -54,6 +58,10 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, './'),
         compress: false,
-        port: 9090
+        port: 9090,
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: 1000,
+        },
     }
 };

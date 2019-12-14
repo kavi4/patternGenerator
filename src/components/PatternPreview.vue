@@ -1,52 +1,34 @@
 <template>
-    <div id="pattern-preview" @resize="resize">
-        <canvas id='pattern-preview-art-board' :width="canvasWidth" :height="canvasHeight"></canvas>
+    <div id="pattern-preview">
+        <div class="preview-background">
+            <canvas id='pattern-preview-art-board' :width="width" :height="height"></canvas>
+        </div>
     </div>
 </template>
 
 <script>
+    import {createNamespacedHelpers} from 'vuex';
+
+    const {mapGetters} = createNamespacedHelpers('artBoard');
+
     export default {
         name: "PatternPreview",
-        data: () => {
-            return {
-                lastWindowWidth: 0,
-                lastWindowHeight: 0,
-                canvasWidth: 0,
-                canvasHeight: 0,
-            }
-        },
-        methods: {
-            resize: function () {
-                let artBoard = document.getElementById('pattern-preview-art-board')
-                let diffWidth = window.innerWidth - this.lastWindowWidth;
-                let diffHeight = window.innerHeight - this.lastWindowHeight;
-
-                if (diffWidth !== 0) {
-                    artBoard.width = artBoard.clientWidth + artBoard.clientWidth * diffWidth / this.lastWindowWidth
-                    this.lastWindowWidth = window.innerWidth;
-                }
-
-                if (diffHeight !== 0) {
-                    artBoard.height = artBoard.clientHeight + artBoard.clientHeight * (diffHeight / this.lastWindowHeight)
-                    this.lastWindowHeight = window.innerHeight;
-                }
-            }
-        },
-        mounted() {
-            this.lastWindowWidth = window.innerWidth
-            this.lastWindowHeight = window.innerHeight
-
-            window.addEventListener('resize', this.resize)
-
-            let patternPreview = document.getElementById('pattern-preview')
-            this.canvasWidth = patternPreview.clientWidth
-            this.canvasHeight = patternPreview.clientHeight
-        }
+        computed: mapGetters(['width', 'height']),
     }
 </script>
 
 <style lang="sass" scoped>
     @import "~Colors"
+
+    #pattern-preview
+        background-color: $color-main--light
+        overflow: scroll
+        min-width: 0
+
     #pattern-preview-art-board
         background-color: $color-main--dark
+
+    .preview-background
+        padding: 50px
+        overflow-x: auto
 </style>
