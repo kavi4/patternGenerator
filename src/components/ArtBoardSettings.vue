@@ -1,23 +1,21 @@
 <template>
     <div class="art-board-settings">
-        <h3 class="title" grid-area="title">Canvas</h3>
-        <div class="field">
+        <h3 class="title">Canvas</h3>
+        <div class="field-width">
             <label class="label" for="art-board-width">Width</label>
             <input
                     class="property"
                     type="text"
                     id="art-board-width"
-                    grid-area="width"
                     :value="width"
                     @change="setWidth($event.target.value)">
         </div>
-        <div class="field">
+        <div class="field-height">
             <label class="label" for="art-board-height">Height</label>
             <input
                     class="property"
                     type="text"
                     id="art-board-height"
-                    grid-area="height"
                     :value="height"
                     @change="setHeight($event.target.value)">
         </div>
@@ -41,6 +39,13 @@
 
     .title
         margin: 0
+        grid-area: title
+
+    .field-width
+        grid-area: width
+
+    .field-height
+        grid-area: height
 
     .art-board-settings
         display: grid
