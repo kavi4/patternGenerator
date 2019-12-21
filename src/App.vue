@@ -6,8 +6,8 @@
 </template>
 
 <script>
-    import PatternPreview from "Components/PatternPreview";
-    import SettingBar from "Components/SettingBar";
+    import PatternPreview from "Components/ThePatternPreview";
+    import SettingBar from "Components/TheSettingBar";
 
     export default {
         name: 'app',

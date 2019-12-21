@@ -1,6 +1,6 @@
 const actions = {
-    saveAttribute(context, payload) {
-        context.commit('saveAttribute', payload)
+    changeAttribute(context, payload) {
+        context.commit('changeAttribute', payload)
     },
 }
 export default actions

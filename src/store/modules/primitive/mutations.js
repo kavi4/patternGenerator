@@ -1,5 +1,5 @@
 const mutations = {
-    saveAttribute(store, payload) {
+    changeAttribute(store, payload) {
         store.primitives[payload.id][payload.attribute] = payload.value
     },
 }

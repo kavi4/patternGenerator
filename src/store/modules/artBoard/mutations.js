@@ -1,9 +1,6 @@
 const mutations = {
-    setWidth(store, width) {
-        store.width = width
+    changeAttribute(store, payload) {
+        store[payload.name] = payload.value
     },
-    setHeight(store, height) {
-        store.height = height
-    }
 }
 export default mutations
