@@ -1,5 +1,5 @@
 <template>
-    <div class="primitive">
+    <div class="primitive-create-form">
         <div class="file">
             <base-file-input v-model="file"/>
         </div>
@@ -30,62 +30,40 @@
                     label="Max"
                     v-model="rotationMax"/>
         </div>
+        <div class="control">
+            <button class="btn primary create-btn" @click="create">+</button>
+        </div>
     </div>
 </template>
 
 <script>
-    import BaseTextInput from "Components/BaseTextInput";
+    import BaseTextInput from "Components/BaseTextInput"
     import BaseFileInput from "Components/BaseFileInput";
 
-    function attribute(name) {
-        let result = {}
-
-        result[name] = {
-            get() {
-                return this.primitive[name]
-            },
-            set(event) {
-                this.changeAttribute({id: this.primitive.id, attribute: name, value: event.target.value})
-            },
-        }
-
-        return result
-    }
-
     export default {
-        name: "Primitive",
-        components: {BaseFileInput, BaseTextInput},
-        props: {
-            primitive: {
-                required: true,
+        name: "PrimitiveCreateForm",
+        data: () => {
+            return {
+                file: null,
+                sizeMin: 0,
+                sizeMax: 0,
+                destinyMin: 0,
+                destinyMax: 0,
+                rotationMax: 0,
+                rotationMin: 0,
             }
         },
-        computed: Object.assign(
-            attribute('sizeMin'),
-            attribute('sizeMax'),
-            attribute('destinyMin'),
-            attribute('destinyMax'),
-            attribute('rotationMax'),
-            attribute('rotationMin'),
-        ),
         methods: {
-            changeAttribute(payload) {
-                this.$emit('changeAttribute', payload)
+            create() {
+                this.$emit('create', this.data)
             }
-        }
+        },
+        components: {BaseFileInput, BaseTextInput},
     }
 </script>
 
 <style lang="sass" scoped>
     @import "~Colors"
-
-    .primitive
-        background-color: $color-main
-        display: grid
-        grid-template-areas: "file file file" "size destiny rotation"
-        grid-template-rows: 1fr 1fr
-        grid-template-columns: 1fr 1fr 1fr
-        grid-gap: 10px
 
     .file
         grid-area: file
@@ -98,4 +76,22 @@
 
     .rotation
         grid-area: rotation
+
+    .control
+        grid-area: control
+
+    .primitive-create-form
+        display: grid
+        grid-template-areas: "file file file" "size destiny rotation" "control control control"
+        grid-template-rows: 1fr 1fr 0.5fr
+        grid-template-columns: 1fr 1fr 1fr
+        grid-gap: 10px
+
+    .create-btn
+        width: 100%
+        height: 100%
+        outline: none
+
+    .create-btn:hover
+        background-color: $color-secondary--light
 </style>

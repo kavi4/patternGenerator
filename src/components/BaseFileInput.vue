@@ -1,7 +1,6 @@
 <template>
-    <div class="text-input">
-        <label v-if="label">{{label}}</label>
-        <input type="text"
+    <div class="file-input">
+        <input type="file"
                class="property"
                v-on="listeners"
                :value="value">
@@ -11,11 +10,8 @@
 
 <script>
     export default {
-        name: "BaseTextInput",
+        name: "BaseFileInput",
         props: {
-            label: {
-                type: String,
-            },
             value: {
                 required: true,
             },
@@ -34,13 +30,14 @@
 <style lang="sass" scoped>
     @import "~Colors"
 
+    .file-input
+        min-width: 100%
+        min-height: 100%
+        border: 1px dashed $color-secondary
+        background-color: $color-main
+
     .property
-        width: 5em
-        border: none
-        padding: 5px
-        background-color: transparent
-        color: $color-text-light
-        border-bottom: 1px solid $color-main--dark
+        display: none
 
     .property:focus
         outline: none

@@ -8,6 +8,7 @@
                    :key="primitive.id">
         </primitive>
         <hr>
+        <primitive-create-form/>
     </div>
 </template>
 
@@ -15,13 +16,14 @@
     import ArtBoardSettings from "Components/TheArtBoardSettings";
     import Primitive from "Components/Primitive";
     import {createNamespacedHelpers} from 'vuex';
+    import PrimitiveCreateForm from "Components/PrimitiveCreateForm";
 
     const primitive = createNamespacedHelpers('primitive');
     const artBoard = createNamespacedHelpers('artBoard');
 
     export default {
         name: "SettingBar",
-        components: {Primitive, ArtBoardSettings},
+        components: {PrimitiveCreateForm, Primitive, ArtBoardSettings},
         computed: Object.assign(
             primitive.mapGetters(['primitives']),
             artBoard.mapGetters(['width', 'height'])

@@ -45,4 +45,15 @@
 
     #app > *
         min-width: 0
+
+    .btn
+        padding: 5px
+        border: none
+        width: 100%
+        color: $color-text-dark
+        font-size: 1em
+        border-radius: 5px
+
+    .primary
+        background-color: $color-secondary
 </style>
