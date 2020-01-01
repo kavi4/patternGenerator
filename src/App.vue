@@ -53,7 +53,5 @@
         color: $color-text-dark
         font-size: 1em
         border-radius: 5px
-
-    .primary
-        background-color: $color-secondary
+        outline: none
 </style>

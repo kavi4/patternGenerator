@@ -51,6 +51,7 @@ module.exports = {
     resolve: {
         alias: {
             "Components": path.resolve(__dirname, 'src/components/'),
+            "Mixins": path.resolve(__dirname, 'src/mixins/'),
             "Colors": path.resolve(__dirname, 'src/assets/colors.sass'),
         },
         extensions: [".js", ".vue"]

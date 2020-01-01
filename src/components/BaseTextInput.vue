@@ -3,7 +3,8 @@
         <label v-if="label">{{label}}</label>
         <input type="text"
                class="property"
-               v-on="listeners"
+               @input="$emit('input', $event.target.value)"
+               @change="$emit('change', $event.target.value)"
                :value="value">
         <span v-if="error" class="error">{{error}}</span>
     </div>
@@ -23,11 +24,6 @@
                 type: String
             }
         },
-        computed: {
-            listeners() {
-                return Object.assign(this.$listeners, {})
-            }
-        }
     }
 </script>
 

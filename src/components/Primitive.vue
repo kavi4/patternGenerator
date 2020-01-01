@@ -30,6 +30,9 @@
                     label="Max"
                     v-model="rotationMax"/>
         </div>
+        <div class="control">
+            <button class="btn delete-btn" @click="deletePrimitive">-</button>
+        </div>
     </div>
 </template>
 
@@ -44,8 +47,8 @@
             get() {
                 return this.primitive[name]
             },
-            set(event) {
-                this.changeAttribute({id: this.primitive.id, attribute: name, value: event.target.value})
+            set(value) {
+                this.changeAttribute({id: this.primitive.id, attribute: name, value: value})
             },
         }
 
@@ -61,6 +64,7 @@
             }
         },
         computed: Object.assign(
+            attribute('file'),
             attribute('sizeMin'),
             attribute('sizeMax'),
             attribute('destinyMin'),
@@ -69,6 +73,9 @@
             attribute('rotationMin'),
         ),
         methods: {
+            deletePrimitive() {
+                this.$emit('delete', this.primitive.id)
+            },
             changeAttribute(payload) {
                 this.$emit('changeAttribute', payload)
             }
@@ -78,14 +85,6 @@
 
 <style lang="sass" scoped>
     @import "~Colors"
-
-    .primitive
-        background-color: $color-main
-        display: grid
-        grid-template-areas: "file file file" "size destiny rotation"
-        grid-template-rows: 1fr 1fr
-        grid-template-columns: 1fr 1fr 1fr
-        grid-gap: 10px
 
     .file
         grid-area: file
@@ -98,4 +97,25 @@
 
     .rotation
         grid-area: rotation
+
+    .control
+        grid-area: control
+
+    .primitive
+        background-color: $color-main
+        display: grid
+        grid-template-areas: "file file file" "size destiny rotation" "control control control"
+        grid-template-rows: 1fr 1fr 0.5fr
+        grid-template-columns: 1fr 1fr 1fr
+        grid-gap: 10px
+
+    .delete-btn
+        width: 100%
+        height: 100%
+        background-color: transparent
+        border: 1px solid $color-main--dark
+
+        &:hover
+            background-color: $color-danger
+
 </style>

@@ -31,33 +31,42 @@
                     v-model="rotationMax"/>
         </div>
         <div class="control">
-            <button class="btn primary create-btn" @click="create">+</button>
+            <button class="btn create-btn" @click="create">+</button>
         </div>
     </div>
 </template>
 
 <script>
     import BaseTextInput from "Components/BaseTextInput"
-    import BaseFileInput from "Components/BaseFileInput";
+    import BaseFileInput from "Components/BaseFileInput"
+    import Uuid from 'uuid/v4'
+    import FormMixin from "Mixins/form"
+
+    const getDefaults = function () {
+        return {
+            id: Uuid(),
+            file: null,
+            sizeMin: 0,
+            sizeMax: 0,
+            destinyMin: 0,
+            destinyMax: 0,
+            rotationMax: 0,
+            rotationMin: 0,
+        }
+    }
 
     export default {
         name: "PrimitiveCreateForm",
         data: () => {
-            return {
-                file: null,
-                sizeMin: 0,
-                sizeMax: 0,
-                destinyMin: 0,
-                destinyMax: 0,
-                rotationMax: 0,
-                rotationMin: 0,
-            }
+            return getDefaults()
         },
         methods: {
             create() {
-                this.$emit('create', this.data)
-            }
+                this.$emit('create', {...this.$data})
+                this.reset(getDefaults())
+            },
         },
+        mixins: [FormMixin],
         components: {BaseFileInput, BaseTextInput},
     }
 </script>
@@ -90,8 +99,9 @@
     .create-btn
         width: 100%
         height: 100%
-        outline: none
+        background-color: transparent
+        border: 1px solid $color-main--dark
 
-    .create-btn:hover
-        background-color: $color-secondary--light
+        &:hover
+            background-color: $color-secondary--light
 </style>
