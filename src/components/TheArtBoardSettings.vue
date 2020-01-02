@@ -9,7 +9,7 @@
         <div class="field-height">
             <base-text-input label="Height"
                              :value="height"
-                             @input="(value)=>{changeAttribute({name:'width', value: Number.parseInt(value)})}"/>
+                             @input="(value)=>{changeAttribute({name:'height', value: Number.parseInt(value)})}"/>
         </div>
     </div>
 </template>

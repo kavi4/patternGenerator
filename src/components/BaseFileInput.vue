@@ -1,7 +1,8 @@
 <template>
     <div class="file-input">
-        <label class="file-input-area" :for="id" :style="inputStyle">
-            <span class="flaticon-more"></span>
+        <label class="file-input-area" :for="id" :style="background">
+            <span class="flaticon-more" v-if="!value"></span>
+
             <input :id="id"
                    type="file"
                    class="property"
@@ -16,9 +17,6 @@
 
     export default {
         name: "BaseFileInput",
-        mounted() {
-            this.id = Uuid()
-        },
         props: {
             value: {
                 required: true,
@@ -28,7 +26,10 @@
             }
         },
         computed: {
-            inputStyle() {
+            id() {
+                return Uuid()
+            },
+            background() {
 
                 if (this.value) {
                     return `background-image:url('${this.value}')`

@@ -46,10 +46,10 @@
         return {
             id: Uuid(),
             file: null,
-            sizeMin: 0,
-            sizeMax: 0,
-            densityMin: 0,
-            densityMax: 0,
+            sizeMin: 1,
+            sizeMax: 1,
+            densityMin: 1,
+            densityMax: 1,
             rotationMax: 0,
             rotationMin: 0,
         }

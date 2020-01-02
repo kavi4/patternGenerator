@@ -1,19 +1,47 @@
 <template>
     <div id="pattern-preview">
         <div class="preview-background">
-            <canvas id='pattern-preview-art-board' :width="width" :height="height"></canvas>
+            <canvas id='pattern-preview-art-board' :width="width" :height="height" @click="generate"></canvas>
         </div>
     </div>
 </template>
 
 <script>
     import {createNamespacedHelpers} from 'vuex'
+    import Generator from 'Services/generator'
 
-    const {mapGetters} = createNamespacedHelpers('artBoard')
+    const primitive = createNamespacedHelpers('primitive')
+    const artBoard = createNamespacedHelpers('artBoard')
 
     export default {
         name: "PatternPreview",
-        computed: mapGetters(['width', 'height']),
+        computed: Object.assign(
+            artBoard.mapGetters(['width', 'height']),
+            primitive.mapGetters(['primitives'])
+        ),
+        methods: {
+            generate(event) {
+                const canvas = event.target
+                const ctx = canvas.getContext('2d');
+
+                ctx.clearRect(0, 0, this.width, this.height);
+
+                const items = Generator.generate(this.primitives, this.width, this.height)
+
+                items.map((item) => {
+                    if (item.rotate !== 0) {
+                        ctx.translate(item.x, item.y)
+                        ctx.rotate(item.rotate)
+                    }
+
+                    ctx.drawImage(item.img, 0, 0, item.width, item.height)
+
+                    if (item.rotate !== 0) {
+                        ctx.resetTransform()
+                    }
+                })
+            }
+        }
     }
 </script>
 
