@@ -110,8 +110,7 @@
         grid-gap: 10px
 
     .delete-btn
-        background-color: transparent
-        border: 1px solid $color-main--dark
+        background-color: $color-main--light
         color: $color-main--dark
         font-size: 10px
 

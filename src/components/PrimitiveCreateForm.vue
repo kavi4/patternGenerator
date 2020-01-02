@@ -97,8 +97,7 @@
         grid-gap: 10px
 
     .create-btn
-        background-color: transparent
-        border: 1px solid $color-main--dark
+        background-color: $color-main--light
         font-size: 10px
         color: $color-main--dark
 

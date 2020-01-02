@@ -4,12 +4,12 @@
         <div class="field-width">
             <base-text-input label="Width"
                              :value="width"
-                             @input="changeAttribute({name:'width', value: Number.parseInt($event.target.value)})"/>
+                             @input="(value)=>{changeAttribute({name:'width', value: Number.parseInt(value)})}"/>
         </div>
         <div class="field-height">
             <base-text-input label="Height"
                              :value="height"
-                             @input="changeAttribute({name:'width', value: Number.parseInt($event.target.value)})"/>
+                             @input="(value)=>{changeAttribute({name:'width', value: Number.parseInt(value)})}"/>
         </div>
     </div>
 </template>

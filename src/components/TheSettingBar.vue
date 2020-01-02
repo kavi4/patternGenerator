@@ -68,12 +68,11 @@
         padding: 5px
 
     .upload
-        background-color: transparent
+        background-color: $color-main--light
         color: $color-main--dark
         text-align: center
         font-size: 10px
         padding: 5px
-        border: 1px solid $color-main--dark
 
         &:hover
             background-color: $color-secondary
