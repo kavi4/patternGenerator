@@ -12,14 +12,14 @@
                     label="Max"
                     v-model="sizeMax"/>
         </div>
-        <div class="destiny">
-            <label>Destiny</label>
+        <div class="density">
+            <label>Density</label>
             <base-text-input
                     label="Min"
-                    v-model="destinyMin"/>
+                    v-model="densityMin"/>
             <base-text-input
                     label="Max"
-                    v-model="destinyMax"/>
+                    v-model="densityMax"/>
         </div>
         <div class="rotation">
             <label>Rotation</label>
@@ -67,8 +67,8 @@
             attribute('file'),
             attribute('sizeMin'),
             attribute('sizeMax'),
-            attribute('destinyMin'),
-            attribute('destinyMax'),
+            attribute('densityMin'),
+            attribute('densityMax'),
             attribute('rotationMax'),
             attribute('rotationMin'),
         ),
@@ -92,8 +92,8 @@
     .size
         grid-area: size
 
-    .destiny
-        grid-area: destiny
+    .density
+        grid-area: density
 
     .rotation
         grid-area: rotation
@@ -104,7 +104,7 @@
     .primitive
         background-color: $color-main
         display: grid
-        grid-template-areas: "file file file" "size destiny rotation" "control control control"
+        grid-template-areas: "file file file" "size density rotation" "control control control"
         grid-template-rows: 1fr 1fr 0.5fr
         grid-template-columns: 1fr 1fr 1fr
         grid-gap: 10px
