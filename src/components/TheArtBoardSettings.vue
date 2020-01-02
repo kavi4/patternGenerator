@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import BaseTextInput from "Components/BaseTextInput";
+    import BaseTextInput from "Components/BaseTextInput"
 
     export default {
         name: "ArtBoardSettings",

@@ -31,14 +31,14 @@
                     v-model="rotationMax"/>
         </div>
         <div class="control">
-            <button class="btn delete-btn" @click="deletePrimitive">-</button>
+            <button class="btn delete-btn flaticon-line" @click="deletePrimitive"></button>
         </div>
     </div>
 </template>
 
 <script>
-    import BaseTextInput from "Components/BaseTextInput";
-    import BaseFileInput from "Components/BaseFileInput";
+    import BaseTextInput from "Components/BaseTextInput"
+    import BaseFileInput from "Components/BaseFileInput"
 
     function attribute(name) {
         let result = {}
@@ -110,12 +110,13 @@
         grid-gap: 10px
 
     .delete-btn
-        width: 100%
-        height: 100%
         background-color: transparent
         border: 1px solid $color-main--dark
+        color: $color-main--dark
+        font-size: 10px
 
         &:hover
             background-color: $color-danger
+            color: $color-main--light
 
 </style>

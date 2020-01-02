@@ -7,9 +7,9 @@
 </template>
 
 <script>
-    import {createNamespacedHelpers} from 'vuex';
+    import {createNamespacedHelpers} from 'vuex'
 
-    const {mapGetters} = createNamespacedHelpers('artBoard');
+    const {mapGetters} = createNamespacedHelpers('artBoard')
 
     export default {
         name: "PatternPreview",

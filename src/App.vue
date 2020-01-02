@@ -6,8 +6,9 @@
 </template>
 
 <script>
-    import PatternPreview from "Components/ThePatternPreview";
-    import SettingBar from "Components/TheSettingBar";
+    import PatternPreview from "Components/ThePatternPreview"
+    import SettingBar from "Components/TheSettingBar"
+    import 'Assets/fonts/icons/flaticon.css'
 
     export default {
         name: 'app',
@@ -50,6 +51,7 @@
         padding: 5px
         border: none
         width: 100%
+        height: 100%
         color: $color-text-dark
         font-size: 1em
         border-radius: 5px

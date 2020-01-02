@@ -38,7 +38,17 @@ module.exports = {
                         }
                     }
                 ]
-            }
+            },
+            {
+                test: /\.(ttf|eot|woff|svg|woff2)$/,
+                use: {
+                    loader: "file-loader",
+                    options: {
+                        name: `[name].[ext]`,
+                        outputPath: 'fonts/',
+                    }
+                }
+            },
         ],
     },
 
@@ -51,6 +61,7 @@ module.exports = {
     resolve: {
         alias: {
             "Components": path.resolve(__dirname, 'src/components/'),
+            "Assets": path.resolve(__dirname, 'src/assets/'),
             "Mixins": path.resolve(__dirname, 'src/mixins/'),
             "Colors": path.resolve(__dirname, 'src/assets/colors.sass'),
         },

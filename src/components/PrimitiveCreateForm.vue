@@ -31,7 +31,7 @@
                     v-model="rotationMax"/>
         </div>
         <div class="control">
-            <button class="btn create-btn" @click="create">+</button>
+            <button class="btn create-btn flaticon-more" @click="create"></button>
         </div>
     </div>
 </template>
@@ -97,11 +97,12 @@
         grid-gap: 10px
 
     .create-btn
-        width: 100%
-        height: 100%
         background-color: transparent
         border: 1px solid $color-main--dark
+        font-size: 10px
+        color: $color-main--dark
 
         &:hover
-            background-color: $color-secondary--light
+            background-color: $color-secondary
+            color: $color-main--light
 </style>
