@@ -24,7 +24,7 @@
     import ArtBoardSettings from "Components/TheArtBoardSettings"
     import Primitive from "Components/Primitive"
     import {createNamespacedHelpers} from 'vuex'
-    import ImageTypes from "Constants/imageTypes"
+    import Image from "Constants/image"
     import FileSaver from "filesaver.js-npm"
     import Notification from 'Constants/notification'
 
@@ -49,7 +49,7 @@
                 uploadResult() {
                     const canvas = document.getElementById('pattern-preview-art-board')
                     canvas.toBlob(function (blob) {
-                        FileSaver.saveAs(blob, `pattern.${ImageTypes.PNG}`);
+                        FileSaver.saveAs(blob, `${Image.NAME}.${Image.TYPE.PNG}`);
                     });
 
                     this.$notify({
