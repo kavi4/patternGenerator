@@ -15,10 +15,10 @@
 
     export default {
         name: "PatternPreview",
-        computed: Object.assign(
-            artBoard.mapGetters(['width', 'height']),
-            primitive.mapGetters(['primitives'])
-        ),
+        computed: {
+            ...artBoard.mapState(['width', 'height']),
+            ...primitive.mapGetters(['primitives'])
+        },
         methods: {
             generate(event) {
                 const canvas = event.target

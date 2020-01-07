@@ -35,18 +35,18 @@
     export default {
         name: "SettingBar",
         components: {PrimitiveCreateForm, Primitive, ArtBoardSettings},
-        computed: Object.assign(
-            primitive.mapGetters(['primitives']),
-            artBoard.mapGetters(['width', 'height'])
-        ),
-        methods: Object.assign(
-            primitive.mapActions({
+        computed: {
+            ...primitive.mapState(['primitives']),
+            ...artBoard.mapState(['width', 'height'])
+        },
+        methods: {
+            ...primitive.mapActions({
                 changePrimitiveAttribute: 'changeAttribute',
                 deletePrimitive: 'delete',
                 createPrimitive: 'create',
             }),
-            artBoard.mapActions({changeArtBoardAttribute: 'changeAttribute'}),
-            {
+            ...artBoard.mapActions({changeArtBoardAttribute: 'changeAttribute'}),
+            ...{
                 uploadResult() {
                     const canvas = document.getElementById('pattern-preview-art-board')
                     canvas.toBlob(function (blob) {
@@ -61,7 +61,7 @@
                     })
                 }
             }
-        )
+        }
     }
 </script>
 

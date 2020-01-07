@@ -7,28 +7,28 @@
             <label>Size</label>
             <base-text-input
                     label="Min"
-                    v-model="sizeMin"/>
+                    v-model.number="sizeMin"/>
             <base-text-input
                     label="Max"
-                    v-model="sizeMax"/>
+                    v-model.number="sizeMax"/>
         </div>
         <div class="density">
             <label>Density</label>
             <base-text-input
                     label="Min"
-                    v-model="densityMin"/>
+                    v-model.number="densityMin"/>
             <base-text-input
                     label="Max"
-                    v-model="densityMax"/>
+                    v-model.number="densityMax"/>
         </div>
         <div class="rotation">
             <label>Rotation</label>
             <base-text-input
                     label="Min"
-                    v-model="rotationMin"/>
+                    v-model.number="rotationMin"/>
             <base-text-input
                     label="Max"
-                    v-model="rotationMax"/>
+                    v-model.number="rotationMax"/>
         </div>
         <div class="control">
             <button class="btn delete-btn flaticon-line" @click="deletePrimitive"></button>
@@ -63,15 +63,15 @@
                 required: true,
             }
         },
-        computed: Object.assign(
-            attribute('file'),
-            attribute('sizeMin'),
-            attribute('sizeMax'),
-            attribute('densityMin'),
-            attribute('densityMax'),
-            attribute('rotationMax'),
-            attribute('rotationMin'),
-        ),
+        computed: {
+            ...attribute('file'),
+            ...attribute('sizeMin'),
+            ...attribute('sizeMax'),
+            ...attribute('densityMin'),
+            ...attribute('densityMax'),
+            ...attribute('rotationMax'),
+            ...attribute('rotationMin'),
+        },
         methods: {
             deletePrimitive() {
                 this.$emit('delete', this.primitive.id)
