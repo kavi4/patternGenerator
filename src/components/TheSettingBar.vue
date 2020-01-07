@@ -1,5 +1,8 @@
 <template>
     <div id="setting-bar">
+        <div class="control">
+            <button class="btn upload flaticon-arrow" @click="uploadResult"></button>
+        </div>
         <div class="settings">
             <art-board-settings :width="width" :height="height" @changeAttribute="changeArtBoardAttribute"/>
             <hr>
@@ -12,10 +15,7 @@
                 </primitive>
                 <hr>
             </template>
-            <primitive-create-form @create="createPrimitive"/>
-        </div>
-        <div class="control">
-            <button class="btn upload flaticon-arrow" @click="uploadResult"></button>
+            <button class="btn create-btn flaticon-more" @click="createPrimitive"></button>
         </div>
     </div>
 </template>
@@ -24,7 +24,6 @@
     import ArtBoardSettings from "Components/TheArtBoardSettings"
     import Primitive from "Components/Primitive"
     import {createNamespacedHelpers} from 'vuex'
-    import PrimitiveCreateForm from "Components/PrimitiveCreateForm"
     import ImageTypes from "Constants/imageTypes"
     import FileSaver from "filesaver.js-npm"
     import Notification from 'Constants/notification'
@@ -34,7 +33,7 @@
 
     export default {
         name: "SettingBar",
-        components: {PrimitiveCreateForm, Primitive, ArtBoardSettings},
+        components: {Primitive, ArtBoardSettings},
         computed: {
             ...primitive.mapState(['primitives']),
             ...artBoard.mapState(['width', 'height'])
@@ -91,6 +90,16 @@
         text-align: center
         font-size: 10px
         padding: 5px
+
+        &:hover
+            background-color: $color-secondary
+            color: $color-main--light
+
+    .create-btn
+        background-color: $color-main--light
+        font-size: 10px
+        color: $color-main--dark
+        height: 40px
 
         &:hover
             background-color: $color-secondary

@@ -17,7 +17,7 @@
         name: "PatternPreview",
         computed: {
             ...artBoard.mapState(['width', 'height']),
-            ...primitive.mapGetters(['primitives'])
+            ...primitive.mapState(['primitives'])
         },
         methods: {
             generate(event) {
