@@ -54,9 +54,6 @@ module.exports = {
 
     plugins: [
         new VueLoaderPlugin(),
-        new webpack.WatchIgnorePlugin([
-            path.join(__dirname, "node_modules")
-        ]),
     ],
     resolve: {
         alias: {

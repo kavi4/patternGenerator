@@ -2,17 +2,28 @@
     <div id="app">
         <pattern-preview></pattern-preview>
         <setting-bar></setting-bar>
+        <notifications position="bottom right" :group="notificationGroups.MAIN"/>
     </div>
 </template>
 
 <script>
+    import Vue from 'vue'
     import PatternPreview from "Components/ThePatternPreview"
     import SettingBar from "Components/TheSettingBar"
+    import Notifications from 'vue-notification'
+    import Notification from 'Constants/notification'
     import 'Assets/fonts/icons/flaticon.css'
+
+    Vue.use(Notifications)
 
     export default {
         name: 'app',
         components: {SettingBar, PatternPreview},
+        computed: {
+            notificationGroups() {
+                return Notification.GROUP
+            }
+        }
     }
 </script>
 

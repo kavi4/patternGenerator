@@ -27,6 +27,7 @@
     import PrimitiveCreateForm from "Components/PrimitiveCreateForm"
     import ImageTypes from "Constants/imageTypes"
     import FileSaver from "filesaver.js-npm"
+    import Notification from 'Constants/notification'
 
     const primitive = createNamespacedHelpers('primitive')
     const artBoard = createNamespacedHelpers('artBoard')
@@ -51,6 +52,13 @@
                     canvas.toBlob(function (blob) {
                         FileSaver.saveAs(blob, `pattern.${ImageTypes.PNG}`);
                     });
+
+                    this.$notify({
+                        group: Notification.GROUP.MAIN,
+                        type: Notification.TYPE.SUCCESS,
+                        title: 'Complete',
+                        text: 'Downloading was completed'
+                    })
                 }
             }
         )
