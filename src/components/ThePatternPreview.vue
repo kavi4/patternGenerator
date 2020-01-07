@@ -34,7 +34,7 @@
                         ctx.rotate(item.rotate)
                     }
 
-                    ctx.drawImage(item.img, 0, 0, item.width, item.height)
+                    ctx.drawImage(item.img, item.x, item.y, item.width, item.height)
 
                     if (item.rotate !== 0) {
                         ctx.resetTransform()

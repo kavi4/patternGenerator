@@ -15,7 +15,7 @@
             <primitive-create-form @create="createPrimitive"/>
         </div>
         <div class="control">
-            <button class="btn upload flaticon-arrow"></button>
+            <button class="btn upload flaticon-arrow" @click="uploadResult"></button>
         </div>
     </div>
 </template>
@@ -25,6 +25,8 @@
     import Primitive from "Components/Primitive"
     import {createNamespacedHelpers} from 'vuex'
     import PrimitiveCreateForm from "Components/PrimitiveCreateForm"
+    import ImageTypes from "Constants/imageTypes"
+    import FileSaver from "filesaver.js-npm"
 
     const primitive = createNamespacedHelpers('primitive')
     const artBoard = createNamespacedHelpers('artBoard')
@@ -42,7 +44,15 @@
                 deletePrimitive: 'delete',
                 createPrimitive: 'create',
             }),
-            artBoard.mapActions({changeArtBoardAttribute: 'changeAttribute'})
+            artBoard.mapActions({changeArtBoardAttribute: 'changeAttribute'}),
+            {
+                uploadResult() {
+                    const canvas = document.getElementById('pattern-preview-art-board')
+                    canvas.toBlob(function (blob) {
+                        FileSaver.saveAs(blob, `pattern.${ImageTypes.PNG}`);
+                    });
+                }
+            }
         )
     }
 </script>

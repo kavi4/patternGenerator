@@ -61,6 +61,7 @@ module.exports = {
     resolve: {
         alias: {
             "Components": path.resolve(__dirname, 'src/components/'),
+            "Constants": path.resolve(__dirname, 'src/constants/'),
             "Assets": path.resolve(__dirname, 'src/assets/'),
             "Mixins": path.resolve(__dirname, 'src/mixins/'),
             "Services": path.resolve(__dirname, 'src/services/'),
