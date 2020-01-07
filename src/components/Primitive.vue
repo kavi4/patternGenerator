@@ -4,30 +4,30 @@
             <base-file-input v-model="file"/>
         </div>
         <div class="size">
-            <label>Size</label>
+            <label>{{$t('size')}}</label>
             <base-text-input
-                    label="Min"
+                    :label="$t('min')"
                     v-model.number="sizeMin"/>
             <base-text-input
-                    label="Max"
+                    :label="$t('max')"
                     v-model.number="sizeMax"/>
         </div>
         <div class="density">
-            <label>Density</label>
+            <label>{{$t('density')}}</label>
             <base-text-input
-                    label="Min"
+                    :label="$t('min')"
                     v-model.number="densityMin"/>
             <base-text-input
-                    label="Max"
+                    :label="$t('max')"
                     v-model.number="densityMax"/>
         </div>
         <div class="rotation">
-            <label>Rotation</label>
+            <label>{{$t('rotation')}}</label>
             <base-text-input
-                    label="Min"
+                    :label="$t('min')"
                     v-model.number="rotationMin"/>
             <base-text-input
-                    label="Max"
+                    :label="$t('max')"
                     v-model.number="rotationMax"/>
         </div>
         <div class="control">
@@ -37,8 +37,8 @@
 </template>
 
 <script>
-    import BaseTextInput from "Components/BaseTextInput"
-    import BaseFileInput from "Components/BaseFileInput"
+    import BaseTextInput from 'Components/BaseTextInput'
+    import BaseFileInput from 'Components/BaseFileInput'
 
     function attribute(name) {
         let result = {}
@@ -84,7 +84,7 @@
 </script>
 
 <style lang="sass" scoped>
-    @import "~Colors"
+    @import '~Colors'
 
     .file
         grid-area: file
@@ -104,7 +104,7 @@
     .primitive
         background-color: $color-main
         display: grid
-        grid-template-areas: "file file file" "size density rotation" "control control control"
+        grid-template-areas: 'file file file' 'size density rotation' 'control control control'
         grid-template-rows: 1fr 1fr 0.5fr
         grid-template-columns: 1fr 1fr 1fr
         grid-gap: 10px
@@ -119,3 +119,13 @@
             color: $color-main--light
 
 </style>
+
+<i18n locale="en" lang="json5">
+    {
+    "min": "Min",
+    "max": "Max",
+    "size": "Size",
+    "density": "Density",
+    "rotation": "Rotation"
+    }
+</i18n>

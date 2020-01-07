@@ -14,7 +14,7 @@
     const artBoard = createNamespacedHelpers('artBoard')
 
     export default {
-        name: "PatternPreview",
+        name: 'PatternPreview',
         computed: {
             ...artBoard.mapState(['width', 'height']),
             ...primitive.mapState(['primitives'])
@@ -46,7 +46,7 @@
 </script>
 
 <style lang="sass" scoped>
-    @import "~Colors"
+    @import '~Colors'
 
     #pattern-preview
         background-color: $color-main--light

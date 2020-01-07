@@ -16,7 +16,7 @@
     import Uuid from 'uuid/v4'
 
     export default {
-        name: "BaseFileInput",
+        name: 'BaseFileInput',
         props: {
             value: {
                 required: true,
@@ -51,7 +51,7 @@
 </script>
 
 <style lang="sass" scoped>
-    @import "~Colors"
+    @import '~Colors'
 
     .file-input
         height: 100%

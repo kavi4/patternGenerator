@@ -1,20 +1,16 @@
 <template>
     <div id="app">
-        <pattern-preview></pattern-preview>
-        <setting-bar></setting-bar>
+        <pattern-preview/>
+        <setting-bar/>
         <notifications position="bottom right" :group="notificationGroups.MAIN"/>
     </div>
 </template>
 
 <script>
-    import Vue from 'vue'
-    import PatternPreview from "Components/ThePatternPreview"
-    import SettingBar from "Components/TheSettingBar"
-    import Notifications from 'vue-notification'
+    import PatternPreview from 'Components/ThePatternPreview'
+    import SettingBar from 'Components/TheSettingBar'
     import Notification from 'Constants/notification'
     import 'Assets/fonts/icons/flaticon.css'
-
-    Vue.use(Notifications)
 
     export default {
         name: 'app',
@@ -28,7 +24,7 @@
 </script>
 
 <style lang="sass">
-    @import "~Colors"
+    @import '~Colors'
     body
         background-color: $color-main
 
@@ -41,7 +37,7 @@
 
     #app
         display: grid
-        grid-template-areas: "patternPreview settingBar"
+        grid-template-areas: 'patternPreview settingBar'
         grid-template-rows: 1fr
         grid-template-columns: 3fr 1fr
         grid-gap: 10px

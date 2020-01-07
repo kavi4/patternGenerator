@@ -18,6 +18,11 @@ module.exports = {
                 loader: 'vue-loader'
             },
             {
+                resourceQuery: /\bblockType=i18n\b/,
+                type: 'javascript/auto',
+                loader: '@kazupon/vue-i18n-loader'
+            },
+            {
                 test: /\.css$/i,
                 use: [
                     'style-loader',

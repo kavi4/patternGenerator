@@ -1,13 +1,13 @@
 <template>
     <div class="art-board-settings">
-        <h3 class="title">Canvas</h3>
+        <h3 class="title">{{$t('height')}}</h3>
         <div class="field-width">
-            <base-text-input label="Width"
+            <base-text-input :label="$t('width')"
                              :value="width"
                              @input="(value)=>{changeAttribute({name:'width', value: Number.parseInt(value)})}"/>
         </div>
         <div class="field-height">
-            <base-text-input label="Height"
+            <base-text-input :label="$t('height')"
                              :value="height"
                              @input="(value)=>{changeAttribute({name:'height', value: Number.parseInt(value)})}"/>
         </div>
@@ -15,10 +15,10 @@
 </template>
 
 <script>
-    import BaseTextInput from "Components/BaseTextInput"
+    import BaseTextInput from 'Components/BaseTextInput'
 
     export default {
-        name: "ArtBoardSettings",
+        name: 'ArtBoardSettings',
         props: {
             width: {
                 require: true,
@@ -39,7 +39,7 @@
 </script>
 
 <style lang="sass" scoped>
-    @import "~Colors"
+    @import '~Colors'
 
     .title
         margin: 0
@@ -53,9 +53,17 @@
 
     .art-board-settings
         display: grid
-        grid-template-areas: "title title" "width height"
+        grid-template-areas: 'title title' 'width height'
         grid-template-rows: 1fr 1fr
         grid-template-columns: 1fr 1fr
         grid-gap: 5px
         padding: 5px
 </style>
+
+<i18n locale="en" lang="json5">
+    {
+    "canvas": "Canvas",
+    "width": "Width",
+    "height": "Height",
+    }
+</i18n>

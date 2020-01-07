@@ -21,18 +21,18 @@
 </template>
 
 <script>
-    import ArtBoardSettings from "Components/TheArtBoardSettings"
-    import Primitive from "Components/Primitive"
+    import ArtBoardSettings from 'Components/TheArtBoardSettings'
+    import Primitive from 'Components/Primitive'
     import {createNamespacedHelpers} from 'vuex'
-    import Image from "Constants/image"
-    import FileSaver from "filesaver.js-npm"
+    import Image from 'Constants/image'
+    import FileSaver from 'filesaver.js-npm'
     import Notification from 'Constants/notification'
 
     const primitive = createNamespacedHelpers('primitive')
     const artBoard = createNamespacedHelpers('artBoard')
 
     export default {
-        name: "SettingBar",
+        name: 'SettingBar',
         components: {Primitive, ArtBoardSettings},
         computed: {
             ...primitive.mapState(['primitives']),
@@ -65,7 +65,7 @@
 </script>
 
 <style lang="sass" scoped>
-    @import "~Colors"
+    @import '~Colors'
 
     .control
         grid-area: control
@@ -75,7 +75,7 @@
 
     #setting-bar
         display: grid
-        grid-template-areas: "control" "settings"
+        grid-template-areas: 'control' 'settings'
         grid-template-rows: 40px 1fr
         grid-template-columns: 1fr
         grid-gap: 0

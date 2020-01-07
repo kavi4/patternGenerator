@@ -12,7 +12,7 @@
 
 <script>
     export default {
-        name: "BaseTextInput",
+        name: 'BaseTextInput',
         props: {
             label: {
                 type: String,
@@ -28,7 +28,7 @@
 </script>
 
 <style lang="sass" scoped>
-    @import "~Colors"
+    @import '~Colors'
 
     .property
         width: 5em
