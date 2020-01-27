@@ -4,7 +4,10 @@
             <button class="btn upload flaticon-arrow" @click="uploadResult"></button>
         </div>
         <div class="settings">
-            <art-board-settings :width="width" :height="height" @changeAttribute="changeArtBoardAttribute"/>
+            <art-board-settings :width="width"
+                                :height="height"
+                                :$v="artBoardValidation"
+                                @changeAttribute="changeArtBoardAttribute"/>
             <hr>
             <template v-for="primitive in primitives">
                 <primitive
@@ -36,7 +39,7 @@
         components: {Primitive, ArtBoardSettings},
         computed: {
             ...primitive.mapState(['primitives']),
-            ...artBoard.mapState(['width', 'height'])
+            ...artBoard.mapState({width: 'width', height: 'height', artBoardValidation: '$v'})
         },
         methods: {
             ...primitive.mapActions({

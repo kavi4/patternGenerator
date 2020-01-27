@@ -4,12 +4,14 @@
         <div class="field-width">
             <base-text-input :label="$t('width')"
                              :value="width"
-                             @input="(value)=>{changeAttribute({name:'width', value: Number.parseInt(value)})}"/>
+                             :error="$v.width"
+                             @input="(value)=>{changeAttribute({attribute:'width', value: Number.parseInt(+value)})}"/>
         </div>
         <div class="field-height">
             <base-text-input :label="$t('height')"
                              :value="height"
-                             @input="(value)=>{changeAttribute({name:'height', value: Number.parseInt(value)})}"/>
+                             :error="$v.height"
+                             @input="(value)=>{changeAttribute({attribute:'height', value: Number.parseInt(+value)})}"/>
         </div>
     </div>
 </template>
@@ -27,6 +29,10 @@
             height: {
                 require: true,
                 type: Number
+            },
+            $v: {
+                require: true,
+                type: Object
             }
         },
         components: {BaseTextInput},

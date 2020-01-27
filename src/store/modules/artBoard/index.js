@@ -1,6 +1,7 @@
 import actions from './actions'
 import mutations from './mutations'
 import getters from './getters'
+import validators from './validators'
 
 const artBoard = {
     namespaced: true,
@@ -10,7 +11,8 @@ const artBoard = {
     },
     mutations,
     actions,
-    getters
+    getters,
+    validators,
 }
 
 export default artBoard

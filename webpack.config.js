@@ -68,6 +68,8 @@ module.exports = {
             "Mixins": path.resolve(__dirname, 'src/mixins/'),
             "Services": path.resolve(__dirname, 'src/services/'),
             "Colors": path.resolve(__dirname, 'src/assets/colors.sass'),
+            "Validators": path.resolve(__dirname, 'src/validators/'),
+            "Store": path.resolve(__dirname, 'src/store/'),
         },
         extensions: [".js", ".vue"]
     },

@@ -1,6 +1,6 @@
 const mutations = {
     changeAttribute(store, payload) {
-        store[payload.name] = payload.value
+        store[payload.attribute] = payload.value
     },
 }
 export default mutations

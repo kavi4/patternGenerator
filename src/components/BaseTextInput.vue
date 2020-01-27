@@ -6,6 +6,7 @@
                @input="$emit('input', $event.target.value)"
                @change="$emit('change', $event.target.value)"
                :value="value">
+        <br/>
         <span v-if="error" class="error">{{error}}</span>
     </div>
 </template>
