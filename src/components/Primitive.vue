@@ -1,34 +1,48 @@
 <template>
     <div class="primitive">
         <div class="file">
-            <base-file-input v-model="file"/>
+            <base-file-input :value="primitive.file"
+                             :error="$v.file"
+                             @change="changeAttribute('file',$event)"/>
         </div>
         <div class="size">
             <label>{{$t('size')}}</label>
             <base-text-input
                     :label="$t('min')"
-                    v-model.number="sizeMin"/>
+                    :value="primitive.sizeMin"
+                    :error="$v.sizeMin"
+                    @change="changeAttribute('sizeMin',$event)"/>
             <base-text-input
                     :label="$t('max')"
-                    v-model.number="sizeMax"/>
+                    :value="primitive.sizeMax"
+                    :error="$v.sizeMax"
+                    @change="changeAttribute('sizeMax',$event)"/>
         </div>
         <div class="density">
             <label>{{$t('density')}}</label>
             <base-text-input
                     :label="$t('min')"
-                    v-model.number="densityMin"/>
+                    :value="primitive.densityMin"
+                    :error="$v.densityMin"
+                    @change="changeAttribute('densityMin',$event)"/>
             <base-text-input
                     :label="$t('max')"
-                    v-model.number="densityMax"/>
+                    :value="primitive.densityMax"
+                    :error="$v.densityMax"
+                    @change="changeAttribute('densityMax',$event)"/>
         </div>
         <div class="rotation">
             <label>{{$t('rotation')}}</label>
             <base-text-input
                     :label="$t('min')"
-                    v-model.number="rotationMin"/>
+                    :value="primitive.rotationMin"
+                    :error="$v.rotationMin"
+                    @change="changeAttribute('rotationMin',$event)"/>
             <base-text-input
                     :label="$t('max')"
-                    v-model.number="rotationMax"/>
+                    :value="primitive.rotationMax"
+                    :error="$v.rotationMax"
+                    @change="changeAttribute('rotationMax',$event)"/>
         </div>
         <div class="control">
             <button class="btn delete-btn flaticon-line" @click="deletePrimitive"></button>
@@ -40,45 +54,27 @@
     import BaseTextInput from 'Components/BaseTextInput'
     import BaseFileInput from 'Components/BaseFileInput'
 
-    function attribute(name) {
-        let result = {}
-
-        result[name] = {
-            get() {
-                return this.primitive[name]
-            },
-            set(value) {
-                this.changeAttribute({id: this.primitive.id, attribute: name, value: value})
-            },
-        }
-
-        return result
-    }
-
     export default {
         name: "Primitive",
         components: {BaseFileInput, BaseTextInput},
         props: {
             primitive: {
                 required: true,
+            },
+            $v: {
+                default: () => {
+                    return {}
+                }
             }
         },
-        computed: {
-            ...attribute('file'),
-            ...attribute('sizeMin'),
-            ...attribute('sizeMax'),
-            ...attribute('densityMin'),
-            ...attribute('densityMax'),
-            ...attribute('rotationMax'),
-            ...attribute('rotationMin'),
-        },
+        computed: {},
         methods: {
             deletePrimitive() {
                 this.$emit('delete', this.primitive.id)
             },
-            changeAttribute(payload) {
-                this.$emit('changeAttribute', payload)
-            }
+            changeAttribute(attribute, value) {
+                this.$emit('changeAttribute', {id: this.primitive.id, attribute, value})
+            },
         }
     }
 </script>
@@ -105,7 +101,7 @@
         background-color: $color-main
         display: grid
         grid-template-areas: 'file file file' 'size density rotation' 'control control control'
-        grid-template-rows: 1fr 1fr 0.5fr
+        grid-template-rows: 100px 1fr 40px
         grid-template-columns: 1fr 1fr 1fr
         grid-gap: 10px
 

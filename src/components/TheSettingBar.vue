@@ -4,17 +4,18 @@
             <button class="btn upload flaticon-arrow" @click="uploadResult"></button>
         </div>
         <div class="settings">
-            <art-board-settings :width="width"
-                                :height="height"
-                                :$v="artBoardValidation"
-                                @changeAttribute="changeArtBoardAttribute"/>
+            <art-board :width="width"
+                       :height="height"
+                       :$v="artBoardValidation"
+                       @changeAttribute="changeArtBoardAttribute"/>
             <hr>
-            <template v-for="primitive in primitives">
+            <template v-for="(primitive, index) in primitives">
                 <primitive
+                        :key="primitive.id"
                         :primitive="primitive"
+                        :$v="getPrimitiveValidation(index,{})"
                         @changeAttribute="changePrimitiveAttribute"
-                        @delete="deletePrimitive"
-                        :key="primitive.id">
+                        @delete="deletePrimitive">
                 </primitive>
                 <hr>
             </template>
@@ -24,7 +25,7 @@
 </template>
 
 <script>
-    import ArtBoardSettings from 'Components/TheArtBoardSettings'
+    import ArtBoard from 'Components/TheArtBoardSettings'
     import Primitive from 'Components/Primitive'
     import {createNamespacedHelpers} from 'vuex'
     import Image from 'Constants/image'
@@ -36,10 +37,10 @@
 
     export default {
         name: 'SettingBar',
-        components: {Primitive, ArtBoardSettings},
+        components: {Primitive, ArtBoard},
         computed: {
-            ...primitive.mapState(['primitives']),
-            ...artBoard.mapState({width: 'width', height: 'height', artBoardValidation: '$v'})
+            ...primitive.mapState({primitives: 'primitives', primitiveValidation: '$v'}),
+            ...artBoard.mapState({width: 'width', height: 'height', artBoardValidation: '$v'}),
         },
         methods: {
             ...primitive.mapActions({
@@ -48,22 +49,27 @@
                 createPrimitive: 'create',
             }),
             ...artBoard.mapActions({changeArtBoardAttribute: 'changeAttribute'}),
-            ...{
-                uploadResult() {
-                    const canvas = document.getElementById('pattern-preview-art-board')
-                    canvas.toBlob(function (blob) {
-                        FileSaver.saveAs(blob, `${Image.NAME}.${Image.TYPE.PNG}`);
-                    });
+            uploadResult() {
+                const canvas = document.getElementById('pattern-preview-art-board')
+                canvas.toBlob(function (blob) {
+                    FileSaver.saveAs(blob, `${Image.NAME}.${Image.TYPE.PNG}`);
+                });
 
-                    this.$notify({
-                        group: Notification.GROUP.MAIN,
-                        type: Notification.TYPE.SUCCESS,
-                        title: 'Complete',
-                        text: 'Downloading was completed'
-                    })
+                this.$notify({
+                    group: Notification.GROUP.MAIN,
+                    type: Notification.TYPE.SUCCESS,
+                    title: 'Complete',
+                    text: 'Downloading was completed'
+                })
+            },
+            getPrimitiveValidation(index, defaultValue) {
+                if (this.primitiveValidation && this.primitiveValidation.primitives) {
+                    const value = this.primitiveValidation.primitives[index]
+                    return value ? value : defaultValue
                 }
+                return defaultValue
             }
-        }
+        },
     }
 </script>
 

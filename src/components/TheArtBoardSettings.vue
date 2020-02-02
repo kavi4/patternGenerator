@@ -5,13 +5,13 @@
             <base-text-input :label="$t('width')"
                              :value="width"
                              :error="$v.width"
-                             @input="(value)=>{changeAttribute({attribute:'width', value: Number.parseInt(+value)})}"/>
+                             @change="changeAttribute('width', $event)"/>
         </div>
         <div class="field-height">
             <base-text-input :label="$t('height')"
                              :value="height"
                              :error="$v.height"
-                             @input="(value)=>{changeAttribute({attribute:'height', value: Number.parseInt(+value)})}"/>
+                             @change="changeAttribute('height', $event)"/>
         </div>
     </div>
 </template>
@@ -21,25 +21,16 @@
 
     export default {
         name: 'ArtBoardSettings',
-        props: {
-            width: {
-                require: true,
-                type: Number
-            },
-            height: {
-                require: true,
-                type: Number
-            },
-            $v: {
-                require: true,
-                type: Object
-            }
+        props: [
+            'width', 'height', '$v'
+        ],
+        components: {
+            BaseTextInput
         },
-        components: {BaseTextInput},
         methods: {
-            changeAttribute(payload) {
-                this.$emit('changeAttribute', payload)
-            }
+            changeAttribute(attribute, value) {
+                this.$emit('changeAttribute', {attribute, value})
+            },
         },
     }
 </script>

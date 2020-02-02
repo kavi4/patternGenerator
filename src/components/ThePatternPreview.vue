@@ -1,7 +1,7 @@
 <template>
     <div id="pattern-preview">
         <div class="preview-background">
-            <canvas id='pattern-preview-art-board' :width="width" :height="height" @click="generate"></canvas>
+            <canvas id='pattern-preview-art-board' width="500" height="500" @click="generate"></canvas>
         </div>
     </div>
 </template>
@@ -16,12 +16,20 @@
     export default {
         name: 'PatternPreview',
         computed: {
-            ...artBoard.mapState(['width', 'height']),
-            ...primitive.mapState(['primitives'])
+            ...primitive.mapState({primitives: 'primitives', primitiveValidation: '$v'}),
+            ...artBoard.mapState({width: 'width', height: 'height', artBoardValidation: '$v'}),
         },
         methods: {
             generate(event) {
+
+                if (Object.keys(this.primitiveValidation).length > 0 || Object.keys(this.artBoardValidation).length > 0) {
+                    return
+                }
+
                 const canvas = event.target
+                canvas.width = this.width
+                canvas.height = this.height
+
                 const ctx = canvas.getContext('2d');
 
                 ctx.clearRect(0, 0, this.width, this.height);

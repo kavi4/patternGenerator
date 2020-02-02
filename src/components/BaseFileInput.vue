@@ -2,13 +2,12 @@
     <div class="file-input">
         <label class="file-input-area" :for="id" :style="background">
             <span class="flaticon-more" v-if="!value"></span>
-
+            <span v-if="error" class="error">{{error}}</span>
             <input :id="id"
                    type="file"
                    class="property"
                    @change.default="change">
         </label>
-        <span v-if="error" class="error">{{error}}</span>
     </div>
 </template>
 
@@ -43,7 +42,7 @@
                 const target = event.target
 
                 if (target.files.length > 0) {
-                    this.$emit('input', URL.createObjectURL(target.files[0]))
+                    this.$emit('change', URL.createObjectURL(target.files[0]))
                 }
             }
         }
