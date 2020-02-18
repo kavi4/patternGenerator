@@ -37,12 +37,17 @@
                 const items = Generator.generate(this.primitives, this.width, this.height)
 
                 items.map((item) => {
+                    let x = item.x
+                    let y = item.y
+
                     if (item.rotate !== 0) {
                         ctx.translate(item.x, item.y)
                         ctx.rotate(item.rotate)
+                        x = -item.width / 2
+                        y = -item.height / 2
                     }
 
-                    ctx.drawImage(item.img, item.x, item.y, item.width, item.height)
+                    ctx.drawImage(item.img, x, y, item.width, item.height)
 
                     if (item.rotate !== 0) {
                         ctx.resetTransform()

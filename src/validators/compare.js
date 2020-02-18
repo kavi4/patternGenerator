@@ -52,14 +52,16 @@ const map = {
 export default (operator, then) => {
     return (value, state) => {
 
+        let thenValue = then
+
         if (typeof then === 'string') {
-            then = state[then]
+            thenValue = state[then]
         }
 
-        let valid = map[operator].validator(value, then)
+        let valid = map[operator].validator(value, thenValue)
 
         if (!valid) {
-            return map[operator].message(value, then)
+            return map[operator].message(value, thenValue)
         }
     }
 }
