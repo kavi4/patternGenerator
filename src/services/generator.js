@@ -23,22 +23,18 @@ export default {
 
                 const rotate = this.toRadians(Math.floor(this.getRandValue(primitive.rotationMin, primitive.rotationMax)))
 
-                result.push(this._getItem(img, x, y, w, h, rotate))
+                result.push({
+                    img,
+                    x,
+                    y,
+                    width: w,
+                    height: h,
+                    rotate,
+                })
             }
         }
 
         return result
-    },
-
-    _getItem(img, x, y, w, h, r) {
-        return {
-            img: img,
-            x: x,
-            y: y,
-            width: w,
-            height: h,
-            rotate: r,
-        }
     },
 
     getRandValue(min, max) {
