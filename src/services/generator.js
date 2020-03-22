@@ -1,29 +1,37 @@
-export default {
-    generate(primitives, width, height) {
-        let result = []
+export default class BaseGenerator {
 
-        for (const id in primitives) {
+    constructor(options) {
+        this.canvasWidth = options.width
+        this.canvasHeight = options.height
+        this.images = []
+    }
 
-            const primitive = primitives[id]
+    /**
+     * Генерирует изображения на основе коллекции примитивов
+     * @param primitives Примитивы
+     * @returns {Array}
+     */
+    generate(primitives) {
+
+        Object.values(primitives).map((primitive) => {
 
             let img = new Image();
             img.src = primitive.file
 
-            const instanceCount = Math.floor(this.getRandValue(+primitive.densityMin, +primitive.densityMax))
+            const instanceCount = Math.floor(this._rand(+primitive.densityMin, +primitive.densityMax))
 
             for (let i = 0; i < instanceCount; i++) {
 
-                //TODO set number type into store
-                const size = this.getRandValue(+primitive.sizeMin, +primitive.sizeMax)
+                const size = this._rand(+primitive.sizeMin, +primitive.sizeMax)
                 const w = img.naturalWidth * size
                 const h = img.naturalHeight * size
 
-                const x = this.getRandValue(0, width)
-                const y = this.getRandValue(0, height)
+                const x = this._rand(0, this.canvasWidth)
+                const y = this._rand(0, this.canvasHeight)
 
-                const rotate = this.toRadians(Math.floor(this.getRandValue(primitive.rotationMin, primitive.rotationMax)))
+                const rotate = this._radians(Math.floor(this._rand(primitive.rotationMin, primitive.rotationMax)))
 
-                result.push({
+                this.images.push({
                     img,
                     x,
                     y,
@@ -32,16 +40,18 @@ export default {
                     rotate,
                 })
             }
-        }
+        })
 
-        return result
-    },
+        return this.images
+    }
 
-    getRandValue(min, max) {
+
+    _rand(min, max) {
         return Math.random() * (max - min) + min;
-    },
+    }
 
-    toRadians(degrees) {
+
+    _radians(degrees) {
         return degrees * Math.PI / 180;
     }
 }

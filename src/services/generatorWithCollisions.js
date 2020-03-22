@@ -1,96 +1,153 @@
-export default class GeneratorWithCollisions {
+import BaseGenerator from './generator'
 
+export default class GeneratorWithCollisions extends BaseGenerator {
+
+    /**
+     * @param options
+     */
     constructor(options) {
-        this.width = options.width
-        this.height = options.height
+        super(options)
         this.maxAttempts = options.maxAttempts
-        this.images = []
-
     }
 
+    /**
+     * Генерирует изображения на основе коллекции примитивов
+     * @param primitives Примитивы
+     * @returns {Array}
+     */
     generate(primitives) {
-        for (const id in primitives) {
 
-            const primitive = primitives[id]
+        let groups = this._initPrimitiveInstanceCount(primitives)
 
-            let img = new Image();
-            img.src = primitive.file
+        let i = 0
+
+        while (this._getInstanceCount(groups)) {
+            let group = groups[i]
+            let attempts = 1
+
+            if (group.instanceCount) {
+                this._generateImage(group.primitive, attempts)
+                group.instanceCount--
+            }
+
+            i++
+
+            if (i >= groups.length) {
+                i = 0;
+            }
+        }
+        return this.images
+    }
+
+    _getInstanceCount(groups) {
+        return groups.reduce((sum, group) => {
+            return sum + group.instanceCount
+        }, 0);
+    }
+
+    _initPrimitiveInstanceCount(primitives) {
+
+        return Object.values(primitives).map((primitive) => {
 
             const instanceCount = Math.floor(this._rand(+primitive.densityMin, +primitive.densityMax))
 
-            for (let i = 0; i < instanceCount; i++) {
-                let attempts = 1
-                this._generateImage(primitive, img, attempts)
+            return {
+                instanceCount,
+                primitive,
             }
-        }
+        })
     }
 
-    _generateImage(primitive, img, attempts) {
+    _generateImage(primitive, attempts) {
 
         if (attempts > this.maxAttempts) {
             return
         }
 
-        const image = this._getImage(primitive, img)
+        const image = this._generateImageByPrimitive(primitive)
 
         if (this._hasCollision(image)) {
             attempts++
-            return this._generateImage(primitive, img, attempts)
+            return this._generateImage(primitive, attempts)
         }
 
         this.images.push(image)
     }
 
-    _getImage(primitive, img) {
+    _generateImageByPrimitive(primitive) {
+
+        let img = new Image();
+        img.src = primitive.file
 
         const size = this._rand(+primitive.sizeMin, +primitive.sizeMax)
-        const w = img.naturalWidth * size
-        const h = img.naturalHeight * size
+        const width = img.naturalWidth * size
+        const height = img.naturalHeight * size
 
-        const x = this._rand(0, width)
-        const y = this._rand(0, height)
+        const x = this._rand(0, this.canvasWidth)
+        const y = this._rand(0, this.canvasHeight)
 
-        const rotate = this._toRadians(Math.floor(this._rand(primitive.rotationMin, primitive.rotationMax)))
+        const rotate = this._radians(Math.floor(this._rand(primitive.rotationMin, primitive.rotationMax)))
 
         return {
             img,
             x,
             y,
-            width: w,
-            height: h,
+            width,
+            height,
             rotate,
         }
     }
 
-    _rand(min, max) {
-        return Math.random() * (max - min) + min;
-    }
-
-    _toRadians(degrees) {
-        return degrees * Math.PI / 180;
-    }
-
     _hasCollision(insertImage) {
-
-        const x1 = insertImage.x
-        const x2 = insertImage.x + insertImage.width
-        const y1 = insertImage.y
-        const y2 = insertImage.y - insertImage.height
-
         for (let i = 0; i < this.images.length; i++) {
-            const image = this.images[i];
+            let hasCollision = true;
+            const exist = this._getCompareModel(this.images[i])
+            const insert = this._getCompareModel(insertImage)
 
-            const X1 = image.x
-            const X2 = image.x + image.width
-            const Y1 = image.y
-            const Y2 = image.y - image.height
+            if (exist.x1 > insert.x2 && exist.x2 > insert.x2 ||
+                exist.x1 < insert.x1 && exist.x2 < insert.x1 ||
+                exist.y1 < insert.y1 && exist.y2 < insert.y1 ||
+                exist.y1 > insert.y2 && exist.y2 > insert.y2) {
+                hasCollision = false
+            }
 
-            if (x1 >= X1 && x1 <= X2 || x2 >= X1 && x2 <= X2) {
-                if (y1 <= Y1 && y1 >= Y2 || y2 <= Y1 && y2 >= Y2) {
-                    return true
-                }
+            if (hasCollision) {
+                return true;
             }
         }
+
         return false;
+    }
+
+    _getCompareModel(image) {
+
+        const d1 = this._rotateDot(image.x, image.y, image.x - image.width / 2, image.y - image.height / 2, image.rotate)
+        const d2 = this._rotateDot(image.x, image.y, image.x + image.width / 2, image.y - image.height / 2, image.rotate)
+        const d3 = this._rotateDot(image.x, image.y, image.x - image.width / 2, image.y + image.height / 2, image.rotate)
+        const d4 = this._rotateDot(image.x, image.y, image.x + image.width / 2, image.y + image.height / 2, image.rotate)
+
+        return {
+            x1: Math.min(d1.x, d1.x, d2.x, d3.x, d4.x),
+            y1: Math.min(d1.y, d1.y, d2.y, d3.y, d4.y),
+            x2: Math.max(d1.x, d1.x, d2.x, d3.x, d4.x),
+            y2: Math.max(d1.y, d1.y, d2.y, d3.y, d4.y),
+        }
+    }
+
+    /**
+     *
+     * @param x0 центр вращения
+     * @param y0 центр вращения
+     * @param x
+     * @param y
+     * @param angle угол вращения
+     * @returns {{x: number, y: number}}
+     * @private
+     */
+    _rotateDot(x0, y0, x, y, angle) {
+        return {
+            x: x0 + (x - x0) * Math.cos(angle) - (y - y0) * Math.sin(angle),
+            y: y0 + (y - y0) * Math.cos(angle) + (x - x0) * Math.sin(angle),
+        }
     }
 }

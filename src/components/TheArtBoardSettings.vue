@@ -1,6 +1,6 @@
 <template>
     <div class="art-board-settings">
-        <h3 class="title">{{$t('height')}}</h3>
+        <h3 class="title">{{$t('canvas')}}</h3>
         <div class="field-width">
             <base-text-input :label="$t('width')"
                              :value="width"
