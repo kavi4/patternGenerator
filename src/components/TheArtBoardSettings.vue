@@ -13,24 +13,41 @@
                              :error="$v.height"
                              @change="changeAttribute('height', $event)"/>
         </div>
+        <div class="field-generator">
+            <base-select-input
+                    :label="$t('generator')"
+                    :value="generator"
+                    :options="getGeneratorOptions()"
+                    :error="$v.generator"
+                    @change="changeAttribute('generator',$event)"/>
+        </div>
     </div>
 </template>
 
 <script>
     import BaseTextInput from 'Components/BaseTextInput'
+    import BaseSelectInput from "Components/BaseSelectInput"
+    import GENERATOR from 'Constants/generator'
 
     export default {
         name: 'ArtBoardSettings',
         props: [
-            'width', 'height', '$v'
+            'width', 'height', 'generator', '$v'
         ],
         components: {
+            BaseSelectInput,
             BaseTextInput
         },
         methods: {
             changeAttribute(attribute, value) {
                 this.$emit('changeAttribute', {attribute, value})
             },
+
+            getGeneratorOptions() {
+                return Object.values(GENERATOR.TYPE).map((type) => {
+                    return {label: type, code: type}
+                })
+            }
         },
     }
 </script>
@@ -48,10 +65,13 @@
     .field-height
         grid-area: height
 
+    .field-generator
+        grid-area: generator
+
     .art-board-settings
         display: grid
-        grid-template-areas: 'title title' 'width height'
-        grid-template-rows: 1fr 1fr
+        grid-template-areas: 'title title' 'width height' 'generator generator'
+        grid-template-rows: 1fr 1fr auto
         grid-template-columns: 1fr 1fr
         grid-gap: 5px
         padding: 5px
@@ -62,5 +82,6 @@
     "canvas": "Canvas",
     "width": "Width",
     "height": "Height",
+    "generator": "Generator",
     }
 </i18n>

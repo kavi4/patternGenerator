@@ -8,7 +8,9 @@
 
 <script>
     import {createNamespacedHelpers} from 'vuex'
-    import Generator from 'Services/generatorWithCollisions'
+    import BaseGenerator from 'Services/generator'
+    import CollisionGenerator from 'Services/generatorWithCollisions'
+    import GENERATOR from 'Constants/generator'
 
     const primitive = createNamespacedHelpers('primitive')
     const artBoard = createNamespacedHelpers('artBoard')
@@ -17,13 +19,28 @@
         name: 'PatternPreview',
         computed: {
             ...primitive.mapState({primitives: 'primitives', primitiveValidation: '$v'}),
-            ...artBoard.mapState({width: 'width', height: 'height', artBoardValidation: '$v'}),
+            ...artBoard.mapState({width: 'width', height: 'height', artBoardValidation: '$v', generator: 'generator'}),
         },
         methods: {
             generate(event) {
 
                 if (Object.keys(this.primitiveValidation).length > 0 || Object.keys(this.artBoardValidation).length > 0) {
                     return
+                }
+
+                const map = {}
+                map[GENERATOR.TYPE.BASE] = () => {
+                    return new BaseGenerator({
+                        width: this.width,
+                        height: this.height,
+                    })
+                }
+                map[GENERATOR.TYPE.COLLISION] = () => {
+                    return new CollisionGenerator({
+                        width: this.width,
+                        height: this.height,
+                        maxAttempts: 5,
+                    })
                 }
 
                 const canvas = event.target
@@ -34,11 +51,7 @@
 
                 ctx.clearRect(0, 0, this.width, this.height);
 
-                let generator = new Generator({
-                    width: this.width,
-                    height: this.height,
-                    maxAttempts: 5
-                })
+                let generator = map[this.generator]()
 
                 const items = generator.generate(this.primitives)
 
@@ -63,7 +76,7 @@
                     }
                 })
             }
-        }
+        },
     }
 </script>
 

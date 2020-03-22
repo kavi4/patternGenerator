@@ -6,6 +6,7 @@
         <div class="settings">
             <art-board :width="width"
                        :height="height"
+                       :generator="generator"
                        :$v="artBoardValidation"
                        @changeAttribute="changeArtBoardAttribute"/>
             <hr>
@@ -40,7 +41,7 @@
         components: {Primitive, ArtBoard},
         computed: {
             ...primitive.mapState({primitives: 'primitives', primitiveValidation: '$v'}),
-            ...artBoard.mapState({width: 'width', height: 'height', artBoardValidation: '$v'}),
+            ...artBoard.mapState({width: 'width', height: 'height', generator: 'generator', artBoardValidation: '$v'}),
         },
         methods: {
             ...primitive.mapActions({

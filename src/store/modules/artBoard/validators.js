@@ -15,5 +15,8 @@ export default {
         required,
         Number.int,
         positiveNumber,
+    ],
+    generator: [
+        required,
     ]
 }
