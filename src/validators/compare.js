@@ -58,7 +58,7 @@ export default (operator, then) => {
             thenValue = state[then]
         }
 
-        let valid = map[operator].validator(value, thenValue)
+        let valid = map[operator].validator(+value, +thenValue)
 
         if (!valid) {
             return map[operator].message(value, thenValue)

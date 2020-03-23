@@ -70,6 +70,7 @@ module.exports = {
             "Colors": path.resolve(__dirname, 'src/assets/colors.sass'),
             "Validators": path.resolve(__dirname, 'src/validators/'),
             "Store": path.resolve(__dirname, 'src/store/'),
+            "Lang": path.resolve(__dirname, 'src/lang/'),
         },
         extensions: [".js", ".vue"]
     },

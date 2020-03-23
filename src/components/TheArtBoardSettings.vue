@@ -15,8 +15,7 @@
         </div>
         <div class="field-generator">
             <base-select-input
-                    :label="$t('generator')"
-                    :value="generator"
+                    :value="$t(generator)"
                     :options="getGeneratorOptions()"
                     :error="$v.generator"
                     @change="changeAttribute('generator',$event)"/>
@@ -45,7 +44,7 @@
 
             getGeneratorOptions() {
                 return Object.values(GENERATOR.TYPE).map((type) => {
-                    return {label: type, code: type}
+                    return {label: this.$t(type), code: type}
                 })
             }
         },
@@ -82,6 +81,5 @@
     "canvas": "Canvas",
     "width": "Width",
     "height": "Height",
-    "generator": "Generator",
     }
 </i18n>

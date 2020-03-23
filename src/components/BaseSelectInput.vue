@@ -53,10 +53,6 @@
         color: $color-danger
         margin-top: 5px
 
-    .base-select
-        display: inline-block
-        min-width: 10em
-
     .base-select .vs__selected
         color: $color-text-light
 

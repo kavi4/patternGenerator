@@ -3,6 +3,7 @@ import App from './App.vue'
 import store from './store/store'
 import VueI18n from 'vue-i18n'
 import Notifications from 'vue-notification'
+import en from 'Lang/en'
 
 Vue.config.productionTip = false
 
@@ -11,7 +12,7 @@ Vue.use(Notifications)
 
 const i18n = new VueI18n({
     locale: 'en',
-    messages: {},
+    messages: {en},
     fallbackLocale: 'en',
 })
 
